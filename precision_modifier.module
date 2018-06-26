@@ -58,16 +58,16 @@ function precision_modifier_form_alter(&$form, FormStateInterface $form_state, $
           ],
         ],
       ];
-      /*$form['precison_settings']['scale'] = [
+      $form['precision_increments']['scale'] = [
         '#type' => 'select',
         '#title' => t('Scale'),
         '#options' => $scale,
         '#states' => [
           'visible' => [
-            ':input[name="convert"]' => ['checked' => TRUE],
+            ':input[name="increase"]' => ['checked' => TRUE],
           ],
         ],
-      ];*/
+      ];
       $form['actions']['submit']['#submit'][] = 'precision_modifier_field_storage_config_edit_form';
     }
   }
@@ -78,9 +78,9 @@ function precision_modifier_field_storage_config_edit_form(array $form, FormStat
     $field = $form_state->getValue('field');
     $bundle = $form_state->getValue('content_type');
     $precision = $form_state->getValue('precision');
-    drupal_set_message($precision);
+    $scale = $form_state->getValue('scale');
 
     $precisionModifierService = Drupal::service('precision_modifier.default');
-    $precisionModifierService->increasePrecision($field, $bundle, $precision);
+    $precisionModifierService->increasePrecision($field, $bundle, $precision, $scale);
   }
 }

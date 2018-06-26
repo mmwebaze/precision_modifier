@@ -1,4 +1,4 @@
 services:
   precision_modifier.default:
     class: Drupal\precision_modifier\services\PrecisionModifierService
-    arguments: ['@database', '@entity_type.manager']
+    arguments: ['@database', '@entity_type.manager', '@config.factory', '@messenger']
