@@ -45,7 +45,11 @@ class PrecisionModifierService implements PrecisionModifierServiceInterface {
     $this->configFactory = $configFactory;
     $this->messenger = $messenger;
   }
-  public function increasePrecision($field, $bundle, $precision, $scale) {
+
+  /**
+   * @inheritdoc
+   */
+  public function increasePrecision($field, $bundle, $precision, $scale = 0) {
     $database = $this->connection;
     $tables = [
       "node_revision__{$field}",
